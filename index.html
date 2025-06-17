@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phương Mai | Portfolio</title>
+    <style>
+      :root {
+        --primary-color: #a2d2ff;
+        --accent-color: #0077b6;
+        --text-color: #333;
+        --background-color: #ffffff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth; /* Enable smooth scrolling */
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
+        background-color: var(--background-color);
+        line-height: 1.6;
+        padding-top: 60px; /* Offset for fixed navbar */
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: linear-gradient(120deg, var(--primary-color), #ffffff);
+        border-bottom: 2px solid var(--accent-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--accent-color);
+      }
+
+      .nav-menu {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+      }
+
+      .nav-menu li {
+        cursor: pointer;
+      }
+
+      .nav-link {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        padding-bottom: 2px;
+        display: inline-block;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--accent-color);
+        transition: width 0.3s;
+      }
+
+      .nav-link:hover::after,
+      .nav-link:focus::after {
+        width: 100%;
+      }
+
+      .nav-link:focus {
+        outline: 2px solid var(--accent-color);
+        outline-offset: 2px;
+      }
+
+      .hero {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Center content vertically */
+        text-align: center;
+        padding: 2rem 1rem; /* Adjusted padding */
+        min-height: calc(100vh - 60px); /* Adjust for navbar height */
+        background-image: linear-gradient(to bottom, transparent 50%, var(--primary-color) 100%); /* Symbolic background */
+        background-size: cover;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        color: var(--accent-color);
+      }
+
+      .hero p {
+        margin-top: 0.5rem;
+        font-size: 1.2rem;
+        color: #555;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0.5rem auto; /* Reduced margin */
+        padding: 0 1rem;
+      }
+
+      section {
+        margin-bottom: 3rem;
+        scroll-margin-top: 60px; /* Match navbar offset */
+      }
+
+      section h2 {
+        font-size: 2rem;
+        color: var(--accent-color);
+        margin-bottom: 0.5rem; /* Tightened spacing */
+        border-left: 4px solid var(--primary-color);
+        padding-left: 0.5rem;
+      }
+
+      #about {
+        margin-top: 0; /* Remove extra gap above About Me */
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .about-image {
+        width: 100%;
+        max-width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .about-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .about-image::before {
+        content: '👩‍💻';
+        font-size: 4rem;
+        display: none; /* Hide emoji if image loads */
+      }
+
+      .about-text p {
+        margin-bottom: 1rem;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .project-card {
+        background: #f9f9f9;
+        border: 1px solid var(--primary-color);
+        border-radius: 8px;
+        padding: 1rem;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-card h3 {
+        color: var(--accent-color);
+        margin-bottom: 0.5rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1.2rem;
+        background-color: var(--primary-color);
+        color: #333;
+      }
+
+      @media (max-width: 600px) {
+        .navbar {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1rem;
+        }
+
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .nav-menu {
+          flex-wrap: wrap;
+          gap: 1rem;
+          justify-content: center;
+        }
+
+        body {
+          padding-top: 80px; /* Adjusted offset for mobile */
+        }
+
+        .hero {
+          min-height: calc(100vh - 80px);
+          padding: 1.5rem 1rem; /* Adjusted padding */
+        }
+
+        section {
+          scroll-margin-top: 80px; /* Match mobile navbar offset */
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .about-image {
+          margin: 0 auto 1.5rem;
+          max-width: 200px;
+          height: 200px;
+        }
+
+        .about-text h2 {
+          text-align: center; /* Center title on mobile */
+        }
+      }
+
+      @media (min-width: 601px) and (max-width: 768px) {
+        .container {
+          max-width: 700px;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .nav-menu {
+          gap: 1.5rem;
+        }
+
+        .about-image {
+          max-width: 250px;
+          height: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">Phương Mai</div>
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About Me</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Lê Ngọc Phương Mai</h1>
+        <p>Creative Frontend Developer & UI/UX Designer</p>
+      </div>
+    </section>
+
+    <main class="container">
+      <section id="about" class="about">
+        <div class="about-content">
+          <div class="about-image">
+            <img src="img/me.jpg" alt="" />
+          </div>
+          <div class="about-text">
+            <h2>About Me</h2>
+            <p>Hello! I'm from Open University and I'm a Computer Science student passionate about web development and UI/UX design. I love transforming ideas into elegant, functional interfaces using code.</p>
+            <p>Currently focusing on frontend development with HTML, CSS, and JavaScript, alongside learning design tools like Figma.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <h3>Personal Portfolio</h3>
+            <p>A responsive portfolio website to showcase my skills and work.</p>
+          </div>
+          <div class="project-card">
+            <h3>Simple Blog</h3>
+            <p>Minimalist blog layout built with modern HTML & CSS principles.</p>
+          </div>
+          <div class="project-card">
+            <h3>Weather App</h3>
+            <p>Small web app using APIs to display real-time weather data.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <p>HTML, CSS, JavaScript, React, Figma, Git</p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:lnpmai2005@gmail.com">lnpmai2005@gmail.com</a></p>
+        <p>Tel: <a href="tel:+84912345678">123-456-789</a></p>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 Lê Ngọc Phương Mai. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
